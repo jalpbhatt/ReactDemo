@@ -1,19 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
-import TextFields from '../InputFieldsWithIcon/TextFields';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const styles = theme => ({
   root: {
@@ -23,6 +19,13 @@ const styles = theme => ({
   nested: {
     paddingLeft: theme.spacing.unit * 4,
   },
+  spacing: {
+    margin: '2px 0 0 15px'
+  },
+  container: {
+    display: 'flex',
+    fontSize: 15
+  }
 });
 
 class CollapsibleList extends React.Component {
@@ -33,6 +36,34 @@ class CollapsibleList extends React.Component {
   handleClick = () => {
     this.setState(state => ({ open: !state.open }));
   };
+
+  renderContractorDetails = (classes) => {
+
+    return (
+      <section>
+        <div className={classes.container}>
+          <AccountCircle />
+          <label className={classes.spacing}>ABC Vendor</label>
+        </div>
+        <div className={classes.container}>
+          <AccountCircle />
+          <label className={classes.spacing}>Alex Newman</label>
+        </div>
+        <div className={classes.container}>
+          <AccountCircle />
+          <label className={classes.spacing}>Repairing the air condition.</label>
+        </div>
+        <div className={classes.container}>
+          <AccountCircle />
+          <label className={classes.spacing}>10:23:30</label>
+        </div>
+        <div className={classes.container}>
+          <AccountCircle />
+          <label className={classes.spacing}>__:__:__</label>
+        </div>
+      </section>
+    );
+  }
 
   render() {
     const { classes } = this.props;
@@ -50,7 +81,7 @@ class CollapsibleList extends React.Component {
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
-                <TextFields />
+                {this.renderContractorDetails(classes)}
               </ListItem>
             </List>
           </Collapse>

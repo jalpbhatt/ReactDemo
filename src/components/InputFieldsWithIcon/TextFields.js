@@ -1,17 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-
-
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
+import { CalendarToday } from '@material-ui/icons';
 
 const styles = theme => ({
   container: {
@@ -19,9 +13,10 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
+    width: '100%',
+  },
+  gridItem: {
+    width: 300
   },
   menu: {
     width: 200,
@@ -48,6 +43,9 @@ class TextFields extends React.Component {
     });
   };
 
+  /* value={this.state.name} 
+  */
+
   render() {
     const { classes } = this.props;
 
@@ -55,67 +53,67 @@ class TextFields extends React.Component {
       <form className={classes.container} noValidate autoComplete="off">
         <Grid container spacing={24}>
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <Grid container className={classes.gridContainer} spacing={0} alignItems="flex-end">
+            <Grid container spacing={8} className={classes.gridContainer} alignItems="flex-end">
               <Grid item>
                 <AccountCircle />
               </Grid>
-              <Grid item>
-                <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal" />
+              <Grid item className={classes.gridItem}>
+                <TextField id="name" className={classes.textField} placeholder="Enter vendor name" onChange={this.handleChange('name')} margin="normal" />
               </Grid>
             </Grid>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <Grid container className={classes.gridContainer} spacing={0} alignItems="flex-end">
+            <Grid container className={classes.gridContainer} spacing={8} alignItems="flex-end">
               <Grid item>
                 <AccountCircle />
               </Grid>
-              <Grid item>
-                <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal" />
+              <Grid item className={classes.gridItem}>
+                <TextField id="contractorName" placeholder="Enter contractor name" className={classes.textField} onChange={this.handleChange('name')} margin="normal" />
               </Grid>
             </Grid>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <Grid container className={classes.gridContainer} spacing={0} alignItems="flex-end">
+            <Grid container className={classes.gridContainer} spacing={8} alignItems="flex-end">
               <Grid item>
                 <AccountCircle />
               </Grid>
-              <Grid item>
-                <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal" />
+              <Grid item className={classes.gridItem}>
+                <TextField id="contractorJobType" placeholder="Enter job type" className={classes.textField} onChange={this.handleChange('name')} margin="normal" />
               </Grid>
             </Grid>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <Grid container className={classes.gridContainer} spacing={0} alignItems="flex-end">
+            <Grid container className={classes.gridContainer} spacing={8} alignItems="flex-end">
               <Grid item>
                 <AccountCircle />
               </Grid>
-              <Grid item>
-                <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal" />
+              <Grid item className={classes.gridItem}>
+                <TextField id="contractorIDNumber" placeholder="Enter contractor's ID number" className={classes.textField} onChange={this.handleChange('name')} margin="normal" />
               </Grid>
             </Grid>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <Grid container className={classes.gridContainer} spacing={0} alignItems="flex-end">
+            <Grid container className={classes.gridContainer} spacing={8} alignItems="flex-end">
               <Grid item>
                 <AccountCircle />
               </Grid>
-              <Grid item>
-                <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal" />
+              <Grid item className={classes.gridItem}>
+                <TextField id="contractorIDType" placeholder="Enter contractor's ID type" className={classes.textField} onChange={this.handleChange('name')} margin="normal" />
               </Grid>
             </Grid>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4} lg={4}>
-            <Grid container className={classes.gridContainer} spacing={0} alignItems="flex-end">
+            <Grid container className={classes.gridContainer} spacing={8} alignItems="flex-end">
               <Grid item>
-                <AccountCircle />
+                <CalendarToday />
               </Grid>
-              <Grid item>
-              <TextField id="name" type="date" label="Date" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal" />
+              <Grid item className={classes.gridItem}>
+              <TextField id="contractorIDExpiryDate" placeholder="Enter contractor's ID expiry date" type="date" className={classes.textField} onChange={this.handleChange('name')} margin="normal" />
               </Grid>
             </Grid>
           </Grid>

@@ -1,6 +1,5 @@
 import React from 'react';
 import TextFields from '../../InputFieldsWithIcon/TextFields';
-import FormControl from '@material-ui/core/FormControl';
 
 const NewVisitorTabContainer = () => {
 
