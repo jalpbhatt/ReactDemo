@@ -1,0 +1,21 @@
+.newVisitorContainer {
+
+    background-color: cornflowerblue;
+    height: 35px;
+    padding: 14px 10px 0 10px;
+
+    .title {
+        float: left;
+        font-weight: bold;
+        font-size: $l-size;
+    }
+
+    .currentDate {
+        float: right;
+    }
+
+    .inputField {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,16 @@
+.visitorTypeContainer {
+  width: 100%;
+  text-align: center;
+  margin-top: 170px;
+
+  .btnTypeVisitor {
+    margin-top: 50px;
+  }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  { 
+
+  .visitorTypeContainer {
+    margin-top: 450px;
+  }
+}
