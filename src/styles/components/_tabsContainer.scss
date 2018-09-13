@@ -1,17 +1,23 @@
 .newVisitorContainer {
+    .newVisitiorHeader{
+        background-color: cornflowerblue;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
 
-    background-color: cornflowerblue;
-    height: 35px;
-    padding: 14px 10px 0 10px;
+        .title {
+            float: left;
+            font-weight: bold;
+            font-size: $l-size;
+            margin: 14px 0 0 10px;
+        }
 
-    .title {
-        float: left;
-        font-weight: bold;
-        font-size: $l-size;
-    }
-
-    .currentDate {
-        float: right;
+        .currentDate {
+            float: right;
+            margin: 14px 10px 0 0;
+        }
     }
 
     .inputField {

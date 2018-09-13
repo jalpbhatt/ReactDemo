@@ -12,7 +12,7 @@ import SingedOutVisitorTabContainer from './VisitorTabsContainer/SingedOutVisito
 
 function TabContainer({ children, dir }) {
   return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+    <Typography component="div" dir={dir} style={{ padding: 8 * 3, paddingTop: 50 }}>
       {children}
     </Typography>
   );
@@ -68,7 +68,7 @@ class VisitorTabs extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
           
-          <TabContainer dir={theme.direction} style={{ padding: 0 }}><NewVisitorTabContainer /></TabContainer>
+          <TabContainer dir={theme.direction}><NewVisitorTabContainer /></TabContainer>
           <TabContainer dir={theme.direction}><SingedInVisitorTabContainer /></TabContainer>
           <TabContainer dir={theme.direction}><SingedOutVisitorTabContainer /></TabContainer>
         </SwipeableViews>

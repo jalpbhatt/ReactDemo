@@ -6,13 +6,17 @@ const NewVisitorTabContainer = () => {
 
     return (
         <div className="newVisitorContainer">
-            <div className="title">
-                New Visitor
+            <div className="newVisitiorHeader">
+                <div className="title">
+                    New Visitor
+                </div>
+                <div className="currentDate">
+                    12 - Aug - 2018
+                </div>
             </div>
-            <div className="currentDate">
-                12 - Aug - 2018
+            <div>
+                <TextFields />
             </div>
-            <TextFields />
         </div>
     );
 }

@@ -1,9 +1,10 @@
 import React from 'react';
+import CollapsibleList from '../../CollapsibleList/CollapsibleList';
 
 const SignedInVisitorTabContainer = () => {
 
     return (
-        <p>This is signed in visitor tab container!</p>
+        <CollapsibleList />
     );
 }
 
