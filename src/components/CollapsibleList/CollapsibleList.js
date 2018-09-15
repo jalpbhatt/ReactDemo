@@ -74,8 +74,8 @@ class CollapsibleList extends React.Component {
           <ListItem button onClick={this.handleClick}>
             <ListItemIcon>
               <InboxIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Inbox" />
+            </ListItemIcon> 
+            <ListItemText inset primary="Alex Newman" />
             {this.state.open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>

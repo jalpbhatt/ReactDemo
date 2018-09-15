@@ -1,10 +1,15 @@
 import React from 'react';
 
-const VisitorSignaturePage = () => (
+class VisitorSignaturePage extends React.Component {
 
-    <div>
-        <p>This is Visitor Signature Page. It containes Signature component.</p>
-    </div>
-);
+    render() {
+        console.log("Signature Page - called")
+        return (
+            <div>
+                <p>This is Visitor Signature Page. It containes Signature component.</p>
+            </div>
+        );
+    }
+}
 
 export default VisitorSignaturePage;

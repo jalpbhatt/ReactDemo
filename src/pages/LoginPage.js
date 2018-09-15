@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -58,7 +56,7 @@ class LoginPage extends React.Component {
 
     onLoginClick = nav => event => {
         
-        console.log("From onLoginClick! => ");
+        //console.log("From onLoginClick! => ");
         /* 
          * TODO:
          * 
@@ -73,7 +71,6 @@ class LoginPage extends React.Component {
         event.preventDefault();
         if (!!this.state.username && !!this.state.password) {
             nav.push('/visitors');
-            console.log("User is navigating to visitor page!");
         }
     }
 
@@ -81,7 +78,8 @@ class LoginPage extends React.Component {
 
         const { classes, history } = this.props;
         const { username, password } = this.state;
-        //console.log("UserName => " + username + " Password => " + password);
+        
+        //console.log("Login: Props for Routing", this.props);
 
         return (
             <React.Fragment>
