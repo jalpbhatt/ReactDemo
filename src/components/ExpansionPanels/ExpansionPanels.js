@@ -62,8 +62,7 @@ const styles = theme => ({
 
 class ExpansionPanels extends React.Component {
   state = {
-    expanded: 'panel1',
-    checkedB: false,
+    expanded: 0
   };
 
   handleChange = panel => (event, expanded) => {
@@ -76,49 +75,99 @@ class ExpansionPanels extends React.Component {
     this.setState({ [name]: event.target.checked });
   };
 
+  signedInVisitorsList = [
+    {
+      id: 1,
+      visitorName: "Alex Newman",
+      vendorName: "DX Vendor",
+      jobType: "Plumbing",
+      visitorIdNumber: "123",
+      visitorIdType: "123",
+      visitorIdExpiryDate: 1000, // in ms
+      visitDate: '12-Aug-2018',
+      startTime: '10:23:30',
+      endTime: '',
+      docUploadComplete: false,
+      hazardPromptSheet: true
+    },
+    {
+      id: 2,
+      visitorName: "John Cena",
+      vendorName: "World Wrestling Entertainment",
+      jobType: "Wrestling",
+      visitorIdNumber: "456",
+      visitorIdType: "456",
+      visitorIdExpiryDate: 1000, // in ms
+      visitDate: '15-Aug-2018',
+      startTime: '09:20:25',
+      endTime: '11:30:00',
+      docUploadComplete: false,
+      hazardPromptSheet: false
+    }
+  ];
+
+  createTable = () => {
+    let expansionPanel = []
+
+    for (let i = 0; i < this.signedInVisitorsList.length; i++) {
+      let children = []
+      expansionPanel.push(<div>{this.signedInVisitorsList[i]['visitorName']}</div>)
+    }
+    return expansionPanel
+  }
+
   render() {
     const { classes } = this.props;
-    const { expanded, checkedB } = this.state;
+    const { expanded, signedInVisitorsList } = this.state;
+    let expansionPanel = [];
 
-    return (
-      <div className={classes.root}>
-        <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
-          <ExpansionPanelSummary className={(expanded === 'panel1' ? classes.selectedExpansionPanelHeading : '')}>
-            <Typography className={classes.heading}>Alex Newman</Typography>
-            <Typography className={classes.secondaryHeading}>12-Aug-2018</Typography>
+    for (let i = 0; i < this.signedInVisitorsList.length; i++) {
+      let children = []
+      expansionPanel.push(
+        <ExpansionPanel expanded={expanded === i} onChange={this.handleChange(i)}>
+          <ExpansionPanelSummary className={(expanded === i ? classes.selectedExpansionPanelHeading : '')}>
+            <Typography className={classes.heading}>{this.signedInVisitorsList[i]['visitorName']}</Typography>
+            <Typography className={classes.secondaryHeading}>{this.signedInVisitorsList[i]['visitDate']}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div>
                 <div className={classes.container}>
                   <AccountCircle />
-                  <label className={classes.spacing}>ABC Vendor</label>
+                  <label className={classes.spacing}>{this.signedInVisitorsList[i]['vendorName']}</label>
                 </div>
                 <div className={classes.container}>
                   <AccountCircle />
-                  <label className={classes.spacing}>Alex Newman</label>
+                  <label className={classes.spacing}>{this.signedInVisitorsList[i]['visitorName']}</label>
                 </div>
                 <div className={classes.container}>
                   <AccountCircle />
-                  <label className={classes.spacing}>Repairing the air condition.</label>
+                  <label className={classes.spacing}>{this.signedInVisitorsList[i]['jobType']}</label>
                 </div>
                 <div className={classes.inlineDiv}>
                   <span className={classes.inlineContainer}>
                     <div className={classes.accountCircleDiv}><AccountCircle /></div>
-                    <div className={classes.labelDiv}><label className={classes.spacing}>10:23:30</label></div>
+                    <div className={classes.labelDiv}><label className={classes.spacing}>{this.signedInVisitorsList[i]['startTime']}</label></div>
                   </span>
                   <span className={classNames(classes.inlineContainer, classes.rightContainer)}>
                     <div className={classes.accountCircleDiv}><AccountCircle /></div>
-                    <div className={classes.labelDiv}><label className={classes.spacing}>__:__:__</label></div>
+                    <div className={classes.labelDiv}>
+                      <label className={classes.spacing}>
+                        {
+                          (this.signedInVisitorsList[i]['endTime'] !== '') ? this.signedInVisitorsList[i]['endTime'] : '__:__:__'
+                        }
+                      </label>
+                    </div>
                   </span>
                 </div>
                 <div>
-                  <FormControlLabel control={<Checkbox checked={this.state.checkedB} onChange={this.handleCheckboxChange('checkedB')} value="checkedB" color="primary" />} label="Hazard Prompt Sheet" />
+                  <FormControlLabel control={<Checkbox checked={this.signedInVisitorsList[i]['hazardPromptSheet']} onChange={this.handleCheckboxChange(this.signedInVisitorsList[i]['hazardPromptSheet'])} value={this.signedInVisitorsList[i]['hazardPromptSheet']} color="primary" />} label="Hazard Prompt Sheet" />
                 </div>
               </div>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-      </div>
-    );
+      )
+    }
+    return expansionPanel
   }
 }
 
