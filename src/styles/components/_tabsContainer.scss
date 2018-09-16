@@ -6,22 +6,34 @@
         top: 0;
         left: 0;
         width: 100%;
-
         .title {
             float: left;
             font-weight: bold;
             font-size: $l-size;
             margin: 14px 0 0 10px;
         }
-
         .currentDate {
             float: right;
             margin: 14px 10px 0 0;
         }
     }
-
     .inputField {
         width: 100%;
     }
-
+}
+.signedInVisitorContainer {
+    .buttonDivContainer {
+        display: flex;
+        margin-top: 20px;
+        .buttonDiv {
+            margin: auto;
+        }
+        .signOutBtnDiv {
+            float: left;
+        }
+        .captureDocsBtnDiv {
+            float: left;
+            margin-left: 50px;
+        }
+    }
 }
