@@ -12,12 +12,12 @@ const SignedInVisitorTabContainer = () => {
                     <div className="signOutBtnDiv">
                         <Button variant="contained" color="primary" className="button">
                             Sign - Out
-                        </Button>
+                    </Button>
                     </div>
                     <div className="captureDocsBtnDiv">
                         <Button variant="contained" color="primary" className="button">
                             Capture Docs
-                        </Button>
+                    </Button>
                     </div>
                 </div>
             </div>

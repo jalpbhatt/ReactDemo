@@ -17,10 +17,10 @@ export const AppRouter = () => (
     <BrowserRouter>
         <Fragment>
             <Switch>
-                <Route path='/' component={LandingPage} exact={true} />
+                <Route path='/' component={LandingPage} exact />
                 <Route path='/visitortype' component={VisitorTypePage} />
                 <Route path='/login' component={LoginPage} />
-                <Route exact path='/visitors' component={VisitorListPage} />
+                <Route path='/visitors' component={VisitorListPage} />
                 {/* 
                 
                 <Route path='/visitors/capturedocs' component={VisitorCaptureDocPage} />

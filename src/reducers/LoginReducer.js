@@ -6,25 +6,34 @@ import { LoginConstants } from '../constants/LoginConstants';
 const initialState = user ? { loggedIn: true, user } : {};
  */
 
-const initialState = {};
+const loginReducerDefaultState = {
+  userName: undefined,
+  password: undefined,
+  branchCode: undefined,
+  isLoggedIn: false,
+  employeeType: undefined, // Authoriser or Superuser
+  uniqueEmpId: undefined // UUID from backend
+};
 
-export function authentication(state = initialState, action) {
+const LoginReducer = (state = loginReducerDefaultState, action) => {
   switch (action.type) {
-    case LoginConstants.LOGIN_REQUEST:
+
+    case LoginConstants.LOGIN:
       return {
-        loggingIn: true,
-        user: action.user
-      };
-    case LoginConstants.LOGIN_SUCCESS:
-      return {
-        loggedIn: true,
-        user: action.user
-      };
-    case LoginConstants.LOGIN_FAILURE:
-      return {};
+        ...state,
+        userName: action.employee.userName,
+        password: action.employee.password,
+        branchCode: action.employee.branchCode
+      }
+
     case LoginConstants.LOGOUT:
-      return {};
+      return {
+        ...state,
+        uniqueEmpId: action.uniqueEmpId
+      }
     default:
       return state;
   }
 }
+
+export default LoginReducer;

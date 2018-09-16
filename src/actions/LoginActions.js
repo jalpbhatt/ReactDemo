@@ -1,27 +1,21 @@
 import { LoginConstants } from '../constants/LoginConstants';
-import { NotificationActions } from './NotificationActions';
 
-export const LoginActions = {
-    login,
-    logout
-};
+export const authoriserLogin = (
+    {
+        userName,
+        password,
+        branchCode
+    } = {}
+) => ({
+    type: LoginConstants.LOGIN,
+    employee: {
+        userName,
+        password,
+        branchCode
+    }
+});
 
-function loginAuthoriser(userName, password) {
-
-}
-
-function logoutAuthoriser(authToken) {
-
-}
-
-function request(user) {
-    return { type: loginConstants.LOGIN_REQUEST, user }
-}
-
-function sucess(user) {
-    return { type: loginConstants.LOGIN_SUCCESS, user }
-}
-
-function failure(error) {
-    return { type: loginConstants.LOGIN_FAILURE, error }
-}
+export const authoriserLogout = ({ uniqueEmpId } = {}) => ({
+    type: LoginConstants.LOGOUT,
+    uniqueEmpId
+});

@@ -45,9 +45,9 @@ class NewVisitorTabContainer extends React.Component {
     }; */
 
     onSignInClick = nav => event => {
-        
+
         console.log("Nav from onSignInClick= ", nav);
-        //event.preventDefault();
+        event.preventDefault();
         nav.push('/visitors/signature');
         //console.log("SignIn Click =", nav);
     }
@@ -155,7 +155,9 @@ class NewVisitorTabContainer extends React.Component {
                 <div>
                     {this.renderTextFields(this.props)}
                 </div>
+
                 <Route path='/visitors/signature' component={VisitorSignaturePage} />
+
             </div>
         );
     }
