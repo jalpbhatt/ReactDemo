@@ -106,16 +106,6 @@ class ExpansionPanels extends React.Component {
     }
   ];
 
-  createTable = () => {
-    let expansionPanel = []
-
-    for (let i = 0; i < this.signedInVisitorsList.length; i++) {
-      let children = []
-      expansionPanel.push(<div>{this.signedInVisitorsList[i]['visitorName']}</div>)
-    }
-    return expansionPanel
-  }
-
   render() {
     const { classes } = this.props;
     const { expanded, signedInVisitorsList } = this.state;
