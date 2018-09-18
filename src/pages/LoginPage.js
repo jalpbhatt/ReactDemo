@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import { authoriserLogin } from '../actions/LoginActions';
 
 const styles = theme => ({
     layout: {
@@ -47,7 +49,8 @@ class LoginPage extends React.Component {
 
     state = {
         username: "",
-        password: ""
+        password: "",
+        branchCode: ""
     }
 
     handleChange = prop => event => {
@@ -55,7 +58,7 @@ class LoginPage extends React.Component {
     };
 
     onLoginClick = nav => event => {
-        
+
         //console.log("From onLoginClick! => ");
         /* 
          * TODO:
@@ -69,7 +72,18 @@ class LoginPage extends React.Component {
          */
 
         event.preventDefault();
-        if (!!this.state.username && !!this.state.password) {
+        const { dispatch } = this.props;
+
+        if (!!this.state.username && !!this.state.password && !!this.state.branchCode) {
+            
+            this.props.login(this.state.username, this.state.password, this.state.branchCode);
+            /* dispatch(authoriserLogin(
+                {
+                    userName: this.state.username,
+                    password: this.state.password,
+                    branchCode: this.state.branchCode
+                }
+            )); */
             nav.push('/visitors');
         }
     }
@@ -77,16 +91,14 @@ class LoginPage extends React.Component {
     render() {
 
         const { classes, history } = this.props;
-        const { username, password } = this.state;
-        
-        //console.log("Login: Props for Routing", this.props);
+        const { username, password, branchCode } = this.state;
 
         return (
             <React.Fragment>
                 <CssBaseline />
                 <main className={classes.layout}>
                     <Paper className={classes.paper}>
-                        <Typography variant="headline">Authoriser Login</Typography>
+                        <Typography variant="headline">Login</Typography>
                         <form className={classes.form} onSubmit={this.onLoginClick(history)}>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -108,6 +120,16 @@ class LoginPage extends React.Component {
                                     onChange={this.handleChange('password')}
                                 />
                             </FormControl>
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="branchCode">BSB</InputLabel>
+                                <Input
+                                    name="branchCode"
+                                    type="branchCode"
+                                    id="branchCode"
+                                    value={branchCode}
+                                    onChange={this.handleChange('branchCode')}
+                                />
+                            </FormControl>
                             <Button
                                 type="submit"
                                 fullWidth
@@ -125,8 +147,31 @@ class LoginPage extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+
+    const { apiRequestStatus } = state;
+
+    return {
+        isRequestPending: apiRequestStatus.isReuestStatusPending,
+        isRequestSuccess: apiRequestStatus.isRequestStatusSuccess,
+        loginError: apiRequestStatus.requestError
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (userName, password, branchCode) => dispatch(authoriserLogin(
+            {
+                userName,
+                password,
+                branchCode
+            }
+        ))
+    };
+}
+
 LoginPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(LoginPage));

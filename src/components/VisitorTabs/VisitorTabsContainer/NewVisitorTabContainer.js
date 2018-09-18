@@ -6,9 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 import { CalendarToday } from '@material-ui/icons';
-import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import VisitorSignaturePage from '../../../pages/VisitorSignaturePage';
+
 
 const styles = theme => ({
     container: {
@@ -45,11 +44,8 @@ class NewVisitorTabContainer extends React.Component {
     }; */
 
     onSignInClick = nav => event => {
-
-        console.log("Nav from onSignInClick= ", nav);
         event.preventDefault();
-        nav.push('/visitors/signature');
-        //console.log("SignIn Click =", nav);
+        nav.push('/signature');
     }
 
     renderTextFields = (props) => {
@@ -155,9 +151,6 @@ class NewVisitorTabContainer extends React.Component {
                 <div>
                     {this.renderTextFields(this.props)}
                 </div>
-
-                <Route path='/visitors/signature' component={VisitorSignaturePage} />
-
             </div>
         );
     }

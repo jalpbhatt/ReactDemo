@@ -30,6 +30,15 @@ const DefaultState = {
         employeeType: "", // Authoriser or Superuser
         uniqueEmpId: "", // UUID from backend
     },
+    newVisitorDetails: {
+        visitorName: "",
+        vendorName: "",
+        jobType: "",
+        visitorIdNumber: "",
+        visitorIdType: "",
+        visitorIdExpiryDate: 1000,
+        visitorSignatureFile: "" // This is jpeg/png image
+    },
     visitorList: {
         signedInVisitors: [
             {

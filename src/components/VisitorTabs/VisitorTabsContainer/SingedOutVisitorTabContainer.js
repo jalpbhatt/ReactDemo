@@ -1,9 +1,12 @@
 import React from 'react';
+import ExpansionPanels from '../../ExpansionPanels/ExpansionPanels';
 
 const SignedOutVisitorTabContainer = () => {
 
     return (
-        <p>This is signed out visitor tab container!</p>
+        <div>
+            <ExpansionPanels />
+        </div>
     );
 }
 

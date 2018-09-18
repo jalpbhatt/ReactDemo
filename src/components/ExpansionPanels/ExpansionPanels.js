@@ -79,7 +79,7 @@ class ExpansionPanels extends React.Component {
     {
       id: 1,
       visitorName: "Alex Newman",
-      vendorName: "DX Vendor",
+      vendorName: "ABC Vendor",
       jobType: "Plumbing",
       visitorIdNumber: "123",
       visitorIdType: "123",
@@ -92,9 +92,9 @@ class ExpansionPanels extends React.Component {
     },
     {
       id: 2,
-      visitorName: "John Cena",
-      vendorName: "World Wrestling Entertainment",
-      jobType: "Wrestling",
+      visitorName: "John Luckas",
+      vendorName: "XYZ Vendor",
+      jobType: "Cleaning",
       visitorIdNumber: "456",
       visitorIdType: "456",
       visitorIdExpiryDate: 1000, // in ms
