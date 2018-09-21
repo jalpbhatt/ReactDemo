@@ -9,9 +9,11 @@ import Button from '@material-ui/core/Button';
 import { CalendarToday } from '@material-ui/icons';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
 
 import { actionSearchCriteria, fetchSearchVisitorList } from '../actions/SearchActions';
 import NavBar from '../components/NavBar/NavBar';
+import InputLabel from '@material-ui/core/InputLabel';
 
 const styles = theme => ({
     container: {
@@ -36,6 +38,10 @@ const styles = theme => ({
     },
     button: {
         margin: theme.spacing.unit,
+    },
+    formControl: {
+        width: '100%',
+        marginLeft: theme.spacing.unit
     }
 });
 
@@ -58,6 +64,8 @@ class VisitorSearchPage extends React.Component {
     }
 
     handleChange = prop => event => {
+        console.log(prop);
+        console.log(event.target.value);
         this.setState({ [prop]: event.target.value });
     };
 
@@ -120,6 +128,7 @@ class VisitorSearchPage extends React.Component {
                             <Grid item className={classes.gridItem}>
                                 <TextField
                                     id="vendorName"
+                                    label="Vendor name"
                                     className={classes.textField}
                                     placeholder="Enter vendor name"
                                     onChange={this.handleChange('vendorName')}
@@ -166,16 +175,23 @@ class VisitorSearchPage extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <Select
-                                    value={this.state.selectedBranch}
-                                    onChange={this.handleChange('selectedBranch')} >
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="branch-code-simple">Age</InputLabel>
+                                    <Select
+                                        value={this.state.selectedBranch}
+                                        onChange={this.handleChange('selectedBranch')}
+                                        inputProps={{
+                                            name: 'branchCode',
+                                            id: 'branch-code-simple',
+                                        }} >
 
-                                    {branches && branches.map((branch, index) => {
-                                        console.log("Inside Map =>", branch, index);
-                                        <MenuItem key={index} value={0}>{branch}</MenuItem>
-                                    })}
-
-                                </Select>
+                                        {branches && branches.map((branch, index) => {
+                                            return (
+                                                <MenuItem key={index} value={index + 1}>{branch}</MenuItem>
+                                            )
+                                        })}
+                                    </Select>
+                                </FormControl>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -252,7 +268,7 @@ const mapStateToProps = (state) => {
 
     return {
         branches: state.employee.branches,
-        selectedBranch: '123-123'
+        selectedBranch: state.employee.branchCode
         //state.employee.branchCode
     };
 }

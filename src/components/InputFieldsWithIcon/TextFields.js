@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 import { CalendarToday } from '@material-ui/icons';
+import classNames from 'classnames';
 
 const styles = theme => ({
   container: {

@@ -20,8 +20,16 @@
     .inputField {
         width: 100%;
     }
-
 }
+
+@media only screen and (max-device-width : 768px) { 
+
+    .gridItem {
+            width: 240px !important;
+        }
+    
+  }
+
 .signedInVisitorContainer {
     .buttonDivContainer {
         display: flex;
