@@ -3,7 +3,7 @@ import { VisitorConstants } from '../constants/VisitorConstants';
 const visitorReducerDefaulsState = {};
 
 const VisitorReducer = (state = visitorReducerDefaulsState, action) => {
-    console.log("STATE => ", state);
+    //console.log("STATE => ", state);
     switch (action.type) {
         case VisitorConstants.ADD_NEW_VISITOR:
             return {

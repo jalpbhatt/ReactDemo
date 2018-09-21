@@ -96,7 +96,7 @@ const DefaultState = {
         ]
     },
     searchVisitorDetails: {
-        searchVisitorDetails: {
+        searchCriteria: {
             fromDate: 1000,
             toDate: 1000,
             visitorName: "",

@@ -83,7 +83,7 @@ class VisitorListPage extends React.Component {
   render() {
     return (
       <main>
-        <NavBar history={this.props.history} />
+        <NavBar history={this.props.history} showSearch={true} />
         {this.renderTabsWithContainer(this.props)}
       </main>
     );
@@ -110,7 +110,7 @@ VisitorListPage.propTypes = {
 
 const mapStateToProps = (state) => {
 
-  const { apiRequestStatus, visitorList, employee } = state;
+  const { apiRequestStatus, visitorList } = state;
 
   console.log("STATE - object =>", state);
 

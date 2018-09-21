@@ -25,7 +25,7 @@ const styles = {
 
 function NavBar(props) {
     console.log("Nav bar =>", props);
-    const { classes, history } = props;
+    const { classes, history, showSearch } = props;
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -35,12 +35,16 @@ function NavBar(props) {
                     </IconButton>
                     <Typography variant="title" color="inherit" className={classes.grow}>
                         Visitor List
-            </Typography>
-                    <Tooltip title="Search">
-                        <IconButton aria-label="Search" color="inherit">
-                            <Search onClick={() => { history.push('/search'); }} />
-                        </IconButton>
-                    </Tooltip>
+                    </Typography>
+                    {
+                        showSearch && (
+                            <Tooltip title="Search">
+                                <IconButton aria-label="Search" color="inherit">
+                                    <Search onClick={() => { history.push('/search'); }} />
+                                </IconButton>
+                            </Tooltip>
+                        )
+                    }
                 </Toolbar>
             </AppBar>
         </div>

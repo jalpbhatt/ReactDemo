@@ -9,7 +9,6 @@ const SignedInVisitorTabContainer = (props) => {
     console.log("isLoading =>", isLoading);
     return (
 
-
         !isLoading ? (
             <div className="signedInVisitorContainer">
                 <ExpansionPanels visitorList={signedInList} />

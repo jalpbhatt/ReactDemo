@@ -18,7 +18,7 @@ const loginReducerDefaultState = {
 };
 
 const LoginReducer = (state = loginReducerDefaultState, action) => {
-  console.log("STATE => ", state);
+  //console.log("STATE => ", state);
   switch (action.type) {  
     case LoginConstants.LOGIN:
       return {

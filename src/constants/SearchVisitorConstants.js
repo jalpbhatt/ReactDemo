@@ -1,4 +1,5 @@
 export const SearchVisitorConstants = {
 
+    SEARCH_CRITERIA: "SEARCH_CRITERIA",
     FETCH_SEARCH_VISITOR_LIST: 'FETCH_SEARCH_VISITOR_LIST',
 };

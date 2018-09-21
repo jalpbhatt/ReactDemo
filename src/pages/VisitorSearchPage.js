@@ -10,7 +10,8 @@ import { CalendarToday } from '@material-ui/icons';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
-import { searchVisitorList } from '../actions/SearchActions';
+import { actionSearchCriteria, fetchSearchVisitorList } from '../actions/SearchActions';
+import NavBar from '../components/NavBar/NavBar';
 
 const styles = theme => ({
     container: {
@@ -47,8 +48,7 @@ class VisitorSearchPage extends React.Component {
         contractorName: '',
         contractorJobType: '',
         branchCode: '',
-        selectedBranch: '',
-        age: ''
+        selectedBranch: ''
     }
 
     onSearchClick = nav => event => {
@@ -172,7 +172,7 @@ class VisitorSearchPage extends React.Component {
 
                                     {branches && branches.map((branch, index) => {
                                         console.log("Inside Map =>", branch, index);
-                                        <MenuItem key={index} value={0}>0</MenuItem>
+                                        <MenuItem key={index} value={0}>{branch}</MenuItem>
                                     })}
 
                                 </Select>
@@ -191,7 +191,7 @@ class VisitorSearchPage extends React.Component {
 
                     <Grid item xs={12} sm={12} md={12} lg={12} className={classes.submitButton}>
                         <Button type="submit" variant="contained" color="primary" className={classes.button}>
-                            Sign - In
+                            Search
                         </Button>
                     </Grid>
                 </Grid>
@@ -201,8 +201,8 @@ class VisitorSearchPage extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        console.log("getDerivedStateFromProps => Props = ", props);
-        console.log("getDerivedStateFromProps => State = ", state);
+        //console.log("getDerivedStateFromProps => Props = ", props);
+        //console.log("getDerivedStateFromProps => State = ", state);
 
         if (props.selectedBranch !== state.selectedBranch) {
             console.log("New state obj =>", {
@@ -220,16 +220,19 @@ class VisitorSearchPage extends React.Component {
 
     render() {
         return (
-            <div className="newVisitorContainer">
-                <div className="newVisitiorHeader">
-                    <div className="title">
-                        Search a Visitor
+            <main>
+                <NavBar history={this.props.history} showSearch={false} />
+                <div className="searchPage">
+                    <div className="searchHeader">
+                        <div className="title">
+                            Search a Visitor
+                        </div>
+                    </div>
+                    <div>
+                        {this.renderSearchForm(this.props)}
                     </div>
                 </div>
-                <div>
-                    {this.renderSearchForm(this.props)}
-                </div>
-            </div>
+            </main>
         );
     }
 }
@@ -237,14 +240,15 @@ class VisitorSearchPage extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         searchVisitor: (data) => {
-            dispatch(searchVisitorList(data))
+            //console.log(" Search Page ## Fetch Visitor List Dispatch =>", data);
+            dispatch(fetchSearchVisitorList(data));
         }
     };
 }
 
 const mapStateToProps = (state) => {
 
-    console.log("STATE - object ## =>", state.employee.branchCode);
+    //console.log("STATE - Search Criteria ## =>", state);
 
     return {
         branches: state.employee.branches,

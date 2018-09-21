@@ -1,26 +1,22 @@
 import { SearchVisitorConstants } from '../constants/SearchVisitorConstants';
 
-const searchReducerDefaulsState = {
-    fromDate: '',
-    toDate: '',
-    vendorName: '',
-    contractorName: '',
-    contractorJobType: '',
-    branchCode: ''
-};
-
+const searchReducerDefaulsState = {};
 const SearchReducer = (state = searchReducerDefaulsState, action) => {
 
+    console.log("Search Reducer ## => ", action);
     switch (action.type) {
+        
+        case SearchVisitorConstants.SEARCH_CRITERIA: {
+            return {
+                ...state,
+                searchCriteria: action.searchCriteria
+            }
+        }
 
         case SearchVisitorConstants.FETCH_SEARCH_VISITOR_LIST: {
             return {
-                fromDate: action.searchVisitorDetails.fromDate,
-                toDate: action.searchVisitorDetails.toDate,
-                vendorName: action.searchVisitorDetails.vendorName,
-                contractorName: action.searchVisitorDetails.contractorName,
-                contractorJobType: action.searchVisitorDetails.contractorJobType,
-                branchCode: action.searchVisitorDetails.branchCode,
+                ...state,
+                searchVisitorList: action.searchList
             }
         }
 

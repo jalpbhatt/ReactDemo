@@ -1,0 +1,53 @@
+.searchPage {
+    .searchHeader{
+        margin-top: 56px;
+        background-color: cornflowerblue;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        .title {
+            float: left;
+            font-weight: bold;
+            font-size: $l-size;
+            margin: 14px 0 0 10px;
+        }
+    }
+    .backButtonDiv {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 65px;
+    }
+    .criteriaSection {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-top: 50px;
+    }
+    .expansionPanel {
+        padding: 5px;
+    }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  { 
+
+    .searchPage {
+        .searchHeader{
+            margin-top: 64px;
+        }
+        .backButtonDiv {
+            margin-top: 150px;
+        }
+        .criteriaSection {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding-top: 65px;
+        }
+        .expansionPanel {
+            padding: 10px;
+        }
+    }
+}
