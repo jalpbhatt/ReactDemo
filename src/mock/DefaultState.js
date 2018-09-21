@@ -28,7 +28,7 @@ const DefaultState = {
         branchCode: "",
         isSignedIn: false,
         employeeType: "", // Authoriser or Superuser
-        uniqueEmpId: "", // UUID from backend
+        uniqueEmpId: "" // UUID from backend
     },
     newVisitorDetails: {
         visitorName: "",

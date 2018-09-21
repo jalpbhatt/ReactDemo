@@ -24,7 +24,8 @@ const styles = {
 };
 
 function NavBar(props) {
-    const { classes } = props;
+    console.log("Nav bar =>", props);
+    const { classes, history } = props;
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -37,7 +38,7 @@ function NavBar(props) {
             </Typography>
                     <Tooltip title="Search">
                         <IconButton aria-label="Search" color="inherit">
-                            <Search onClick={() => { console.log('onClick'); }} />
+                            <Search onClick={() => { history.push('/search'); }} />
                         </IconButton>
                     </Tooltip>
                 </Toolbar>

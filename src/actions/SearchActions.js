@@ -4,9 +4,9 @@ export const searchVisitorList = (
     {
         fromDate = undefined,
         toDate = undefined,
-        visitorName = "",
         vendorName = "",
-        jobType = "",
+        contractorName = "",
+        contractorJobType = "",
         branchCode = ""
     } = {}
 ) => ({
@@ -14,9 +14,9 @@ export const searchVisitorList = (
     searchVisitorDetails: {
         fromDate,
         toDate,
-        visitorName,
         vendorName,
-        jobType,
+        contractorName,
+        contractorJobType,
         branchCode
     }
 });

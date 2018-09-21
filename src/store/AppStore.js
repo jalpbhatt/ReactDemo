@@ -11,8 +11,8 @@ export const AppStore = () => {
     });
 
     // For testing
-    store.dispatch(authoriserLogin({ userName: "jalp_bhatt", password: "jalp@abc", branchCode: "bsb4321" }));
-    store.dispatch(authoriserLogout({uniqueEmpId: "abc-123-@341-868"}));
+    /* store.dispatch(authoriserLogin({ userName: "jalp_bhatt", password: "jalp@abc", branchCode: "bsb4321" }));
+    store.dispatch(authoriserLogout({uniqueEmpId: "abc-123-@341-868"})); */
     return store;
 };
 

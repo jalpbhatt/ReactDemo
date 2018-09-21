@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -6,8 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 import { CalendarToday } from '@material-ui/icons';
-import { withRouter } from 'react-router-dom';
 
+import { addNewVisitor } from '../../../actions/VisitorActions';
 
 const styles = theme => ({
     container: {
@@ -33,27 +34,29 @@ const styles = theme => ({
 
 class NewVisitorTabContainer extends React.Component {
 
-    //console.log("New visitor Tab: Props for Routing", this.props);
-
-    // TODO:
-
-    /* handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
-    }; */
+    state = {
+        currentDate: '12 - Aug - 2018',
+        vendorName: '',
+        contractorName: '',
+        contractorJobType: '',
+        contractorIDNumber: '',
+        contractorIDType: '',
+        contractorIDExpiryDate: ''
+    }
 
     onSignInClick = nav => event => {
         event.preventDefault();
+        this.props.signInNewVisitor(this.state);
         nav.push('/signature');
     }
+
+    handleChange = prop => event => {
+        this.setState({ [prop]: event.target.value });
+    };
 
     renderTextFields = (props) => {
 
         const { classes, nav } = props;
-
-        //console.log("Nav from renderTextFields= ", nav);
-
         return (
             <form className={classes.container} noValidate autoComplete="off" onSubmit={this.onSignInClick(nav)}>
                 <Grid container spacing={24}>
@@ -63,7 +66,12 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField id="name" className={classes.textField} placeholder="Enter vendor name" /* onChange={this.handleChange('name')} */ margin="normal" />
+                                <TextField 
+                                    id="vendorName" 
+                                    className={classes.textField} 
+                                    placeholder="Enter vendor name" 
+                                    onChange={this.handleChange('vendorName')}
+                                    margin="normal" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -74,7 +82,12 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField id="contractorName" placeholder="Enter contractor name" className={classes.textField} /* onChange={this.handleChange('name')} */ margin="normal" />
+                                <TextField 
+                                    id="contractorName" 
+                                    placeholder="Enter contractor name" 
+                                    className={classes.textField} 
+                                    onChange={this.handleChange('contractorName')}
+                                    margin="normal" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -85,7 +98,12 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField id="contractorJobType" placeholder="Enter job type" className={classes.textField} /* onChange={this.handleChange('name')} */ margin="normal" />
+                                <TextField 
+                                    id="contractorJobType" 
+                                    placeholder="Enter job type" 
+                                    className={classes.textField} 
+                                    onChange={this.handleChange('contractorJobType')}
+                                    margin="normal" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -96,7 +114,12 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField id="contractorIDNumber" placeholder="Enter contractor's ID number" className={classes.textField} /* onChange={this.handleChange('name')} */ margin="normal" />
+                                <TextField 
+                                    id="contractorIDNumber" 
+                                    placeholder="Enter contractor's ID number" 
+                                    className={classes.textField} 
+                                    onChange={this.handleChange('contractorIDNumber')}
+                                    margin="normal" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -107,7 +130,12 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField id="contractorIDType" placeholder="Enter contractor's ID type" className={classes.textField} /* onChange={this.handleChange('name')} */ margin="normal" />
+                                <TextField 
+                                    id="contractorIDType" 
+                                    placeholder="Enter contractor's ID type" 
+                                    className={classes.textField} 
+                                    onChange={this.handleChange('contractorIDType')}
+                                    margin="normal" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -118,7 +146,13 @@ class NewVisitorTabContainer extends React.Component {
                                 <CalendarToday />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField id="contractorIDExpiryDate" placeholder="Enter contractor's ID expiry date" type="date" className={classes.textField} /* onChange={this.handleChange('name')} */ margin="normal" />
+                                <TextField 
+                                    id="contractorIDExpiryDate" 
+                                    placeholder="Enter contractor's ID expiry date" 
+                                    type="date" 
+                                    className={classes.textField} 
+                                    onChange={this.handleChange('contractorIDExpiryDate')} 
+                                    margin="normal" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -135,9 +169,6 @@ class NewVisitorTabContainer extends React.Component {
     }
 
     render() {
-
-        console.log("Test =", this.props);
-
         return (
             <div className="newVisitorContainer">
                 <div className="newVisitiorHeader">
@@ -145,7 +176,7 @@ class NewVisitorTabContainer extends React.Component {
                         New Visitor
                     </div>
                     <div className="currentDate">
-                        12 - Aug - 2018
+                        {this.state.currentDate}
                     </div>
                 </div>
                 <div>
@@ -156,9 +187,17 @@ class NewVisitorTabContainer extends React.Component {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signInNewVisitor: (data) => {
+            dispatch(addNewVisitor(data))
+        }
+    };
+}
+
 NewVisitorTabContainer.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-const container = withStyles(styles)(NewVisitorTabContainer);
-export default withRouter(container);
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(NewVisitorTabContainer));

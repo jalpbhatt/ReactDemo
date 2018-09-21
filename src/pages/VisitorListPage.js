@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NavBar from '../components/NavBar/NavBar';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -10,21 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import NewVisitorTabContainer from '../components/VisitorTabs/VisitorTabsContainer/NewVisitorTabContainer';
 import SingedInVisitorTabContainer from '../components/VisitorTabs/VisitorTabsContainer/SingedInVisitorTabContainer';
 import SingedOutVisitorTabContainer from '../components/VisitorTabs/VisitorTabsContainer/SingedOutVisitorTabContainer';
-import { withRouter } from 'react-router-dom';
 
-
-function TabContainer({ children, dir }) {
-  return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3, paddingTop: 50 }}>
-      {children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  dir: PropTypes.string.isRequired,
-};
+import { fetchSignedInVisitorList, fetchSignedOutVisitorList } from '../actions/VisitorActions';
 
 const styles = theme => ({
   root: {
@@ -36,12 +24,20 @@ const styles = theme => ({
 
 class VisitorListPage extends React.Component {
 
-  // Temporary
   state = {
-    value: 0,
+    value: 0
   };
 
   handleChange = (event, value) => {
+
+    event.preventDefault();
+
+    if (value === 1) {
+      this.props.fetchSingedInList(1);
+    } else if (value === 2) {
+      this.props.fetchSingedOutList(2);
+    }
+
     this.setState({ value });
   };
 
@@ -51,9 +47,9 @@ class VisitorListPage extends React.Component {
 
   renderTabsWithContainer = (props) => {
 
-    const { classes, theme, history } = props;
+    const { classes, theme, history, singedInVisitorList, singedOutVisitorList, isRequestPending } = props;
 
-    //console.log("Visitor Tabs: Props for Routing", this.props);
+    console.log("isLoading =>", isRequestPending);
 
     return (
       <div className={classes.root}>
@@ -76,31 +72,63 @@ class VisitorListPage extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
 
-          <TabContainer dir={theme.direction}><NewVisitorTabContainer nav={history}/></TabContainer>
-          <TabContainer dir={theme.direction}><SingedInVisitorTabContainer nav={history}/></TabContainer>
-          <TabContainer dir={theme.direction}><SingedOutVisitorTabContainer nav={history}/></TabContainer>
+          <TabContainer dir={theme.direction}><NewVisitorTabContainer nav={history} /></TabContainer>
+          <TabContainer dir={theme.direction}><SingedInVisitorTabContainer isLoading={isRequestPending} nav={history} signedInList={singedInVisitorList} /></TabContainer>
+          <TabContainer dir={theme.direction}><SingedOutVisitorTabContainer isLoading={isRequestPending} nav={history} signedOutList={singedOutVisitorList} /></TabContainer>
         </SwipeableViews>
       </div>
     );
   }
 
   render() {
-
-    //console.log("Visitor List Page: Props for Routing", this.props);
-
     return (
       <main>
-        <NavBar />
+        <NavBar history={this.props.history} />
         {this.renderTabsWithContainer(this.props)}
       </main>
     );
   }
 }
 
+function TabContainer({ children, dir }) {
+  return (
+    <Typography component="div" dir={dir} style={{ padding: 8 * 3, paddingTop: 50 }}>
+      {children}
+    </Typography>
+  );
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  dir: PropTypes.string.isRequired,
+};
+
 VisitorListPage.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-const routeWrapperVisitorListPage = withStyles(styles, { withTheme: true })(VisitorListPage);
-export default withRouter(routeWrapperVisitorListPage);
+const mapStateToProps = (state) => {
+
+  const { apiRequestStatus, visitorList, employee } = state;
+
+  console.log("STATE - object =>", state);
+
+  return {
+    isRequestPending: apiRequestStatus.isReuestStatusPending,
+    isRequestSuccess: apiRequestStatus.isRequestStatusSuccess,
+    requestError: apiRequestStatus.requestError,
+    singedInVisitorList: visitorList.signedInVisitors,
+    singedOutVisitorList: visitorList.signedOutVisitors
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchSingedInList: (id) => dispatch(fetchSignedInVisitorList(id)),
+    fetchSingedOutList: (id) => dispatch(fetchSignedOutVisitorList(id))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)
+  (withStyles(styles, { withTheme: true })(VisitorListPage));

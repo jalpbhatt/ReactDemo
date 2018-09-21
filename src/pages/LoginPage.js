@@ -42,9 +42,16 @@ const styles = theme => ({
     submit: {
         marginTop: theme.spacing.unit * 3,
     },
+    message: {
+        fontSize: "15px",
+        marginTop: '10px',
+        textAlign: 'right',
+        color: theme.palette.secondary.main
+    }
 });
 
-/* TODO: Make it Redux container component by using connect() */
+//TODO: Fetch associated branches to the authoriser
+//      This will be used in search page drop down
 class LoginPage extends React.Component {
 
     state = {
@@ -57,40 +64,20 @@ class LoginPage extends React.Component {
         this.setState({ [prop]: event.target.value });
     };
 
-    onLoginClick = nav => event => {
-
-        //console.log("From onLoginClick! => ");
-        /* 
-         * TODO:
-         * 
-         * Create action creator for Login - ACTION_LOGIN
-         * Dispatch the action to middleware & store to 
-         * handle Login API call.
-         * 
-         * On success - navigate to visitors page
-         * On error - display error message
-         */
-
+    onLoginClick = event => {
         event.preventDefault();
-        const { dispatch } = this.props;
-
         if (!!this.state.username && !!this.state.password && !!this.state.branchCode) {
-            
             this.props.login(this.state.username, this.state.password, this.state.branchCode);
-            /* dispatch(authoriserLogin(
-                {
-                    userName: this.state.username,
-                    password: this.state.password,
-                    branchCode: this.state.branchCode
-                }
-            )); */
-            nav.push('/visitors');
         }
+    }
+
+    navigateToVisitorsDashboard = (nav) => {
+        nav.push('/visitors');
     }
 
     render() {
 
-        const { classes, history } = this.props;
+        const { classes, history, isRequestPending, isRequestSuccess, loginError } = this.props;
         const { username, password, branchCode } = this.state;
 
         return (
@@ -99,7 +86,7 @@ class LoginPage extends React.Component {
                 <main className={classes.layout}>
                     <Paper className={classes.paper}>
                         <Typography variant="headline">Login</Typography>
-                        <form className={classes.form} onSubmit={this.onLoginClick(history)}>
+                        <form className={classes.form} onSubmit={this.onLoginClick}>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
                                 <Input
@@ -139,6 +126,12 @@ class LoginPage extends React.Component {
                             >
                                 Log in
                             </Button>
+
+                            <div className={classes.message}>
+                                {isRequestPending && <div>Please wait...</div>}
+                                {isRequestSuccess && this.navigateToVisitorsDashboard(history)}
+                                {loginError && <div>{loginError.message}</div>}
+                            </div>
                         </form>
                     </Paper>
                 </main>
@@ -160,13 +153,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (userName, password, branchCode) => dispatch(authoriserLogin(
-            {
-                userName,
-                password,
-                branchCode
-            }
-        ))
+        login: (userName, password, branchCode) => dispatch(authoriserLogin(userName, password, branchCode))
     };
 }
 

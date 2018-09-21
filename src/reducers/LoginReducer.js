@@ -6,18 +6,20 @@ import { LoginConstants } from '../constants/LoginConstants';
 const initialState = user ? { loggedIn: true, user } : {};
  */
 
+ //TODO: Fill branched details from Login API response
 const loginReducerDefaultState = {
   userName: undefined,
   password: undefined,
   branchCode: undefined,
   isLoggedIn: false,
   employeeType: undefined, // Authoriser or Superuser
-  uniqueEmpId: undefined // UUID from backend
+  uniqueEmpId: undefined, // UUID from backend
+  branches: ["123-564", "437-231", "038-665"]
 };
 
 const LoginReducer = (state = loginReducerDefaultState, action) => {
-  switch (action.type) {
-
+  console.log("STATE => ", state);
+  switch (action.type) {  
     case LoginConstants.LOGIN:
       return {
         ...state,

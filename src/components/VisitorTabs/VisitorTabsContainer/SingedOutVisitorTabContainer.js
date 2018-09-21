@@ -1,12 +1,15 @@
 import React from 'react';
 import ExpansionPanels from '../../ExpansionPanels/ExpansionPanels';
+import LoadingIndicator from '../../LoadingIndicator/LoadingIndicator';
 
-const SignedOutVisitorTabContainer = () => {
-
+const SignedOutVisitorTabContainer = (props) => {
+    const { isLoading, signedOutList } = props;
     return (
-        <div>
-            <ExpansionPanels />
-        </div>
+        !isLoading ? (
+            <div>
+                <ExpansionPanels visitorList={signedOutList} />
+            </div>
+        ) : (<LoadingIndicator isShowing={isLoading}/>)
     );
 }
 
