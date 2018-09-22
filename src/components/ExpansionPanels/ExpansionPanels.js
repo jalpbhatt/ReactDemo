@@ -23,6 +23,9 @@ const styles = theme => ({
   secondaryHeading: {
     fontSize: '0.9em',
     color: theme.palette.text.secondary,
+    [theme.breakpoints.up('xs')]: {
+      paddingRight: '0 !important'
+    }
   },
   nested: {
     paddingLeft: theme.spacing.unit * 4,
@@ -46,7 +49,10 @@ const styles = theme => ({
     marginTop: 1
   },
   rightContainer: {
-    marginLeft: 100
+    marginLeft: 100,
+    [theme.breakpoints.up('xs')]: {
+      marginLeft: 55
+    }
   },
   accountCircleDiv: {
     float: 'left'

@@ -28,7 +28,10 @@ const styles = theme => ({
         width: '100%',
     },
     gridItem: {
-        width: 300
+        width: 300,
+        [theme.breakpoints.up('xs')]: {
+            width: 250
+        }
     },
     menu: {
         width: 200,
