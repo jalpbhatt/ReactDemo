@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import spinner from '../../../assets/images/spinner.gif'
 
-const LoadingIndicator = (props) => (
-    <div>
-        {
-            /* props.isShowing */ true &&
-            <div style={{marginTop: '10px', textAlign: 'center', color: '#26A69A'}}>
-                <i className="fa fa-spinner fa-spin">Loading...</i>
-            </div>
-        }
-    </div>
-);
+const LoadingIndicator = (props) => {
+    return (
+        <div>
+            {
+                props.isShowing &&
+                <div className="container">
+                    <img src={spinner} />
+                </div>
+            }
+        </div>
+    );
+}
 
 LoadingIndicator.propTypes = {
     isShowing: PropTypes.bool

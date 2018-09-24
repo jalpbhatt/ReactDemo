@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 import { CalendarToday } from '@material-ui/icons';
-import classNames from 'classnames';
 
 const styles = theme => ({
   container: {
@@ -31,21 +30,13 @@ const styles = theme => ({
 });
 
 class TextFields extends React.Component {
-  state = {
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
-  };
+  state = { };
 
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
   };
-
-  /* value={this.state.name} 
-  */
 
   render() {
     const { classes } = this.props;

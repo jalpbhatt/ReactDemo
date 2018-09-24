@@ -69,10 +69,10 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField 
-                                    id="vendorName" 
-                                    className={classes.textField} 
-                                    placeholder="Enter vendor name" 
+                                <TextField
+                                    id="vendorName"
+                                    className={classes.textField}
+                                    placeholder="Enter vendor name"
                                     onChange={this.handleChange('vendorName')}
                                     margin="normal" />
                             </Grid>
@@ -85,10 +85,10 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField 
-                                    id="contractorName" 
-                                    placeholder="Enter contractor name" 
-                                    className={classes.textField} 
+                                <TextField
+                                    id="contractorName"
+                                    placeholder="Enter contractor name"
+                                    className={classes.textField}
                                     onChange={this.handleChange('contractorName')}
                                     margin="normal" />
                             </Grid>
@@ -101,10 +101,10 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField 
-                                    id="contractorJobType" 
-                                    placeholder="Enter job type" 
-                                    className={classes.textField} 
+                                <TextField
+                                    id="contractorJobType"
+                                    placeholder="Enter job type"
+                                    className={classes.textField}
                                     onChange={this.handleChange('contractorJobType')}
                                     margin="normal" />
                             </Grid>
@@ -117,10 +117,10 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField 
-                                    id="contractorIDNumber" 
-                                    placeholder="Enter contractor's ID number" 
-                                    className={classes.textField} 
+                                <TextField
+                                    id="contractorIDNumber"
+                                    placeholder="Enter contractor's ID number"
+                                    className={classes.textField}
                                     onChange={this.handleChange('contractorIDNumber')}
                                     margin="normal" />
                             </Grid>
@@ -133,10 +133,10 @@ class NewVisitorTabContainer extends React.Component {
                                 <AccountCircle />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField 
-                                    id="contractorIDType" 
-                                    placeholder="Enter contractor's ID type" 
-                                    className={classes.textField} 
+                                <TextField
+                                    id="contractorIDType"
+                                    placeholder="Enter contractor's ID type"
+                                    className={classes.textField}
                                     onChange={this.handleChange('contractorIDType')}
                                     margin="normal" />
                             </Grid>
@@ -149,12 +149,12 @@ class NewVisitorTabContainer extends React.Component {
                                 <CalendarToday />
                             </Grid>
                             <Grid item className={classes.gridItem}>
-                                <TextField 
-                                    id="contractorIDExpiryDate" 
-                                    placeholder="Enter contractor's ID expiry date" 
-                                    type="date" 
-                                    className={classes.textField} 
-                                    onChange={this.handleChange('contractorIDExpiryDate')} 
+                                <TextField
+                                    id="contractorIDExpiryDate"
+                                    placeholder="Enter contractor's ID expiry date"
+                                    type="date"
+                                    className={classes.textField}
+                                    onChange={this.handleChange('contractorIDExpiryDate')}
                                     margin="normal" />
                             </Grid>
                         </Grid>

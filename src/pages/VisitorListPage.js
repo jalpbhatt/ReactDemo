@@ -49,7 +49,7 @@ class VisitorListPage extends React.Component {
 
     const { classes, theme, history, singedInVisitorList, singedOutVisitorList, isRequestPending } = props;
 
-    console.log("isLoading =>", isRequestPending);
+    //console.log("isLoading =>", isRequestPending);
 
     return (
       <div className={classes.root}>
@@ -112,7 +112,7 @@ const mapStateToProps = (state) => {
 
   const { apiRequestStatus, visitorList } = state;
 
-  console.log("STATE - object =>", state);
+  //console.log("STATE - object =>", state);
 
   return {
     isRequestPending: apiRequestStatus.isReuestStatusPending,

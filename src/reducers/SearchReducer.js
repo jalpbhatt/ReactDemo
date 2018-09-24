@@ -3,7 +3,7 @@ import { SearchVisitorConstants } from '../constants/SearchVisitorConstants';
 const searchReducerDefaulsState = {};
 const SearchReducer = (state = searchReducerDefaulsState, action) => {
 
-    console.log("Search Reducer ## => ", action);
+    //console.log("Search Reducer ## => ", action);
     switch (action.type) {
         
         case SearchVisitorConstants.SEARCH_CRITERIA: {

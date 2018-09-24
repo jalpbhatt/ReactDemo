@@ -11,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 
-import { actionSearchCriteria, fetchSearchVisitorList } from '../actions/SearchActions';
+import { fetchSearchVisitorList } from '../actions/SearchActions';
 import NavBar from '../components/NavBar/NavBar';
 import InputLabel from '@material-ui/core/InputLabel';
 
@@ -67,8 +67,6 @@ class VisitorSearchPage extends React.Component {
     }
 
     handleChange = prop => event => {
-        console.log(prop);
-        console.log(event.target.value);
         this.setState({ [prop]: event.target.value });
     };
 
@@ -76,8 +74,6 @@ class VisitorSearchPage extends React.Component {
 
         const { classes, history, branches } = props;
         const { selectedBranch } = this.state;
-        console.log("Selected branch => renderSearchForm = ", selectedBranch);
-        console.log("Selected branch => renderSearchForm = ", branches);
         return (
             <form className={classes.container} noValidate autoComplete="off" onSubmit={this.onSearchClick(history)}>
                 <Grid container spacing={24}>
@@ -148,6 +144,7 @@ class VisitorSearchPage extends React.Component {
                             <Grid item className={classes.gridItem}>
                                 <TextField
                                     id="contractorName"
+                                    label="Contractor name"
                                     placeholder="Enter contractor name"
                                     className={classes.textField}
                                     onChange={this.handleChange('contractorName')}
@@ -164,6 +161,7 @@ class VisitorSearchPage extends React.Component {
                             <Grid item className={classes.gridItem}>
                                 <TextField
                                     id="contractorJobType"
+                                    label="Job Type"
                                     placeholder="Enter job type"
                                     className={classes.textField}
                                     onChange={this.handleChange('contractorJobType')}
@@ -179,18 +177,20 @@ class VisitorSearchPage extends React.Component {
                             </Grid>
                             <Grid item className={classes.gridItem}>
                                 <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="branch-code-simple">Age</InputLabel>
+                                    <InputLabel htmlFor="branch-code">Branch Code</InputLabel>
                                     <Select
-                                        value={this.state.selectedBranch}
+                                        value={selectedBranch}
                                         onChange={this.handleChange('selectedBranch')}
                                         inputProps={{
                                             name: 'branchCode',
-                                            id: 'branch-code-simple',
+                                            id: 'branch-code',
                                         }} >
 
                                         {branches && branches.map((branch, index) => {
+                                            console.log("# selectedBranch => ", selectedBranch);
+                                            console.log("# branch => ", branch);
                                             return (
-                                                <MenuItem key={index} value={index + 1}>{branch}</MenuItem>
+                                                <MenuItem key={index} value={branch}>{branch}</MenuItem>
                                             )
                                         })}
                                     </Select>
@@ -198,16 +198,6 @@ class VisitorSearchPage extends React.Component {
                             </Grid>
                         </Grid>
                     </Grid>
-
-
-                    {/* <Select
-                        value={this.state.selectedBranch}
-                        onChange={this.handleChange('selectedBranch')} >
-                        {branches && branches.map((branch) => {
-                            return <MenuItem key={branch} value={branch}>{branch}</MenuItem>
-                        })}
-                    </Select> */}
-
                     <Grid item xs={12} sm={12} md={12} lg={12} className={classes.submitButton}>
                         <Button type="submit" variant="contained" color="primary" className={classes.button}>
                             Search
@@ -220,16 +210,17 @@ class VisitorSearchPage extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        //console.log("getDerivedStateFromProps => Props = ", props);
-        //console.log("getDerivedStateFromProps => State = ", state);
-
-        if (props.selectedBranch !== state.selectedBranch) {
-            console.log("New state obj =>", {
-                selectedBranch: props.selectedBranch,
-            });
+        // set default value
+        if ((props.selectedBranch !== state.selectedBranch) && state.selectedBranch === '') {
             return {
-                ...state,
                 selectedBranch: props.selectedBranch,
+            };
+        }
+
+        // update value on drop down change
+        if (props.selectedBranch !== state.selectedBranch) {
+            return {
+                selectedBranch: state.selectedBranch,
             };
         }
 
@@ -259,7 +250,7 @@ class VisitorSearchPage extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         searchVisitor: (data) => {
-            //console.log(" Search Page ## Fetch Visitor List Dispatch =>", data);
+
             dispatch(fetchSearchVisitorList(data));
         }
     };
@@ -267,12 +258,9 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
 
-    //console.log("STATE - Search Criteria ## =>", state);
-
     return {
         branches: state.employee.branches,
         selectedBranch: state.employee.branchCode
-        //state.employee.branchCode
     };
 }
 

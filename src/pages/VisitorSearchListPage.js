@@ -8,18 +8,31 @@ import LoadingIndicator from '../components/LoadingIndicator/LoadingIndicator';
 
 class VisitorSearchListPage extends React.Component {
 
+    onBackClick = history => event => {
+        event.preventDefault();
+        history.goBack();
+    }
+
     renderCriteriaSection = (criteria) => {
         return (
             <div className="criteriaSection">
-                <span><b>Criteria:{"  "} </b></span>
-                {(criteria.fromDate && !!criteria.fromDate) && <span>{criteria.fromDate},{"  "}</span>}
-                {(criteria.toDate && !!criteria.toDate) && <span>,{criteria.toDate}{"  "}</span>}
-                {(criteria.vendorName && !!criteria.vendorName) && <span>,{criteria.vendorName}{"  "}</span>}
-                {(criteria.contractorName && !!criteria.contractorName) && <span>,{criteria.contractorName}{"  "}</span>}
-                {(criteria.contractorJobType && !!criteria.contractorJobType) && <span>,{criteria.contractorJobType}{"  "}</span>}
-                {(criteria.branchCode && !!criteria.branchCode) && <span>,{criteria.branchCode}</span>}
+                <span><b>Criteria:</b> &nbsp; </span>
+                <span>{this.getDisplayCriteriaString(criteria)}</span>
             </div>
         )
+    }
+
+    getDisplayCriteriaString = (criteria) => {
+        let valueAry = Object.keys(criteria).map((key) => {
+            return !!criteria[key] && criteria[key];
+        }).filter((value) => {
+            return !!value;
+        });
+
+        if (valueAry.length > 0) {
+            valueAry = valueAry.join(", ");
+        }
+        return valueAry;
     }
 
     render() {
@@ -44,7 +57,7 @@ class VisitorSearchListPage extends React.Component {
                         </div>
                         <div className="backButtonDiv">
                             <Button variant="contained" color="primary" className="button"
-                                onClick={this.props.onBackClick(history)}>
+                                onClick={this.onBackClick(history)}>
                                 Back
                             </Button>
                         </div>
@@ -59,7 +72,7 @@ const mapStateToProps = (state) => {
 
     const { apiRequestStatus, searchVisitorDetails } = state;
 
-    console.log("STATE - Search List =>", state);
+    //console.log("mapStateToProps = searchCriteria => ", searchVisitorDetails.searchCriteria);
 
     return {
         criteria: searchVisitorDetails.searchCriteria,
@@ -69,12 +82,10 @@ const mapStateToProps = (state) => {
     };
 }
 
-const mapDispatchToProps = (dispatch) => {
+/* const mapDispatchToProps = (dispatch) => {
     return {
-        onBackClick: (history) => {
-            console.log("Back Clicked => ", history);
-        }
+        
     };
-}
+} */
 
-export default connect(mapStateToProps, mapDispatchToProps)(VisitorSearchListPage);
+export default connect(mapStateToProps, null)(VisitorSearchListPage);

@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 const SignedInVisitorTabContainer = (props) => {
 
     const { isLoading, signedInList } = props;
-    console.log("isLoading =>", isLoading);
     return (
 
         !isLoading ? (

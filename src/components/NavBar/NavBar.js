@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Search } from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+import NavMenu from '../NavMenu/NavMenu';
 
 
 const styles = {
@@ -23,32 +24,74 @@ const styles = {
     },
 };
 
-function NavBar(props) {
-    console.log("Nav bar =>", props);
-    const { classes, history, showSearch } = props;
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="title" color="inherit" className={classes.grow}>
-                        Visitor List
+class NavBar extends React.Component {
+
+    state = {
+        anchorEl: null,
+        isOpen: false
+    };
+
+    handleNavClick = event => {
+        console.log("Opens up Menu!!");
+        this.setState({
+            anchorEl: event.currentTarget,
+            isOpen: true
+        });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null, isOpen: false });
+    };
+
+    navigateToHome = () => {
+        this.handleClose();
+        this.props.history.push('/visitors');
+    }
+
+    navigateToLoginOnLogoutClick = () => {
+        this.handleClose();
+        this.props.history.push('/login');
+    }
+
+    render() {
+        const { classes, history, showSearch } = this.props;
+        const { anchorEl, isOpen } = this.state;
+
+        return (
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                            <MenuIcon
+                                aria-owns={anchorEl ? 'nav-menu' : null}
+                                aria-haspopup="true"
+                                onClick={this.handleNavClick}
+                            />
+                        </IconButton>
+                        <Typography variant="title" color="inherit" className={classes.grow}>
+                            Visitor List
                     </Typography>
-                    {
-                        showSearch && (
-                            <Tooltip title="Search">
-                                <IconButton aria-label="Search" color="inherit">
-                                    <Search onClick={() => { history.push('/search'); }} />
-                                </IconButton>
-                            </Tooltip>
-                        )
-                    }
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
+                        {
+                            showSearch && (
+                                <Tooltip title="Search">
+                                    <IconButton aria-label="Search" color="inherit">
+                                        <Search onClick={() => { history.push('/search'); }} />
+                                    </IconButton>
+                                </Tooltip>
+                            )
+                        }
+                    </Toolbar>
+                </AppBar>
+
+                {
+                    isOpen && (
+                        <NavMenu anchorEl={this.state.anchorEl} navigateToHome={this.navigateToHome}
+                            navigateToLoginOnLogoutClick={this.navigateToLoginOnLogoutClick} handleClose={this.handleClose} />
+                    )
+                }
+            </div>
+        );
+    }
 }
 
 NavBar.propTypes = {
