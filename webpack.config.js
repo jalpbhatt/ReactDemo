@@ -18,7 +18,7 @@ module.exports = {
             {
                 test: /\.s?css$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']
-            }
+            }, { test: /\.(jpg|png|gif|svg|pdf|ico)$/, use: [{ loader: 'url-loader', options: { limit: 100000 }, },] }
         ]
     },
     plugins: [

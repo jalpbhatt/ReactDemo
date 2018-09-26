@@ -17,11 +17,18 @@ const styles = {
     },
     grow: {
         flexGrow: 1,
+        textAlign: 'center'
     },
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
     },
+    loggedInUserName: {
+        margin: 0
+    },
+    headerText: {
+        margin: 0,
+    }
 };
 
 class NavBar extends React.Component {
@@ -69,8 +76,9 @@ class NavBar extends React.Component {
                             />
                         </IconButton>
                         <Typography variant="title" color="inherit" className={classes.grow}>
-                            Visitor List
-                    </Typography>
+                            <h6 className={classes.loggedInUserName}>Jalp Bhatt (The SETH)</h6>
+                            <h4 className={classes.headerText}>Visitor List</h4>
+                        </Typography>
                         {
                             showSearch && (
                                 <Tooltip title="Search">
