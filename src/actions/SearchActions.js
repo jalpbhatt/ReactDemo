@@ -19,15 +19,14 @@ export const actionSearchCriteria = (data = searchCrieteriaDefaulsState) => ({
 export const fetchSearchVisitorList = (searchCriteria) => {
     return dispatch => {
 
-        //console.log("Search Action = fetchSearchVisitorList - Criteria =>", searchCriteria);
         dispatch(actionSearchCriteria(searchCriteria));
         dispatch(resetApiRequestStatus());
         dispatch(setApiRequestStatusPending(true));
         callSearchApi(data => {
-           // console.log("Search Action = fetchSearchVisitorList - List =>", data);
             dispatch(actionFetchSearchList(data));
             dispatch(setApiRequestStatusPending(false));
             dispatch(setApiRequestStatusSuccess(true));
+            dispatch(resetApiRequestStatus());
         });
     }
 };

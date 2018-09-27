@@ -5,6 +5,8 @@ import NavBar from '../components/NavBar/NavBar';
 import ExpansionPanels from '../components/ExpansionPanels/ExpansionPanels';
 import LoadingIndicator from '../components/LoadingIndicator/LoadingIndicator';
 
+import { getDisplayStringForHeader } from '../utils/utils';
+
 
 class VisitorSearchListPage extends React.Component {
 
@@ -36,12 +38,11 @@ class VisitorSearchListPage extends React.Component {
     }
 
     render() {
-
         const { isRequestPending, criteria, searchList, history } = this.props;
 
         return (
             <main className="searchPage">
-                <NavBar history={this.props.history} showSearch={false} />
+                <NavBar history={this.props.history} showSearch={false} displayHeaderStr={getDisplayStringForHeader(this.props.userDetails)} />
                 <div>
                     <div className="searchHeader">
                         <div className="title">
@@ -69,23 +70,14 @@ class VisitorSearchListPage extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
-    const { apiRequestStatus, searchVisitorDetails } = state;
-
-    //console.log("mapStateToProps = searchCriteria => ", searchVisitorDetails.searchCriteria);
+    const { apiRequestStatus, searchVisitorDetails, employee } = state;
 
     return {
         criteria: searchVisitorDetails.searchCriteria,
         searchList: searchVisitorDetails.searchVisitorList,
         isRequestPending: apiRequestStatus.isReuestStatusPending,
-        requestError: apiRequestStatus.requestError
+        requestError: apiRequestStatus.requestError,
+        userDetails: employee
     };
 }
-
-/* const mapDispatchToProps = (dispatch) => {
-    return {
-        
-    };
-} */
-
 export default connect(mapStateToProps, null)(VisitorSearchListPage);

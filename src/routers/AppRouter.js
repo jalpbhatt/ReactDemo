@@ -18,10 +18,10 @@ export const AppRouter = () => (
                 <Route path='/visitortype' component={VisitorTypePage} />
                 <Route path='/login' component={LoginPage} />
                 <Route path='/visitors' component={VisitorListPage} />
-                <Route path='/signature' component={VisitorSignaturePage} />
-                <Route path='/capturedocs' component={VisitorCaptureDocPage} />
                 <Route path='/search' component={VisitorSearchPage} />
                 <Route path='/searchlist' component={VisitorSearchListPage} />
+                <Route path='/signature' component={VisitorSignaturePage} />
+                <Route path='/capturedocs' component={VisitorCaptureDocPage} />
             </Fragment>
         </Switch>
     </BrowserRouter >

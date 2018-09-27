@@ -29,6 +29,7 @@ export const fetchSignedInVisitorList = (authoriser_id) => {
             dispatch(actionFetchSignedInVisitorList(data));
             dispatch(setApiRequestStatusPending(false));
             dispatch(setApiRequestStatusSuccess(true));
+            dispatch(resetApiRequestStatus());
         });
     }
 };
@@ -42,6 +43,7 @@ export const fetchSignedOutVisitorList = (authoriser_id) => {
             dispatch(actionFetchSignedOutVisitorList(data));
             dispatch(setApiRequestStatusPending(false));
             dispatch(setApiRequestStatusSuccess(true));
+            dispatch(resetApiRequestStatus());
         });
     }
 };

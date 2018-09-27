@@ -17,17 +17,18 @@ const styles = {
     },
     grow: {
         flexGrow: 1,
-        textAlign: 'center'
+        textAlign: 'center',
+        display: 'inline-grid'
     },
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
     },
     loggedInUserName: {
-        margin: 0
+        fontSize: '14px'
     },
     headerText: {
-        margin: 0,
+        fontSize: '18px'
     }
 };
 
@@ -39,7 +40,6 @@ class NavBar extends React.Component {
     };
 
     handleNavClick = event => {
-        console.log("Opens up Menu!!");
         this.setState({
             anchorEl: event.currentTarget,
             isOpen: true
@@ -60,8 +60,12 @@ class NavBar extends React.Component {
         this.props.history.push('/login');
     }
 
+    capitalizeInitChar = (str) => (
+        str.charAt(0).toUpperCase() + str.slice(1)
+    );
+
     render() {
-        const { classes, history, showSearch } = this.props;
+        const { classes, history, showSearch, displayHeaderStr } = this.props;
         const { anchorEl, isOpen } = this.state;
 
         return (
@@ -76,8 +80,8 @@ class NavBar extends React.Component {
                             />
                         </IconButton>
                         <Typography variant="title" color="inherit" className={classes.grow}>
-                            <h6 className={classes.loggedInUserName}>Jalp Bhatt (The SETH)</h6>
-                            <h4 className={classes.headerText}>Visitor List</h4>
+                            <span className={classes.loggedInUserName}>{this.capitalizeInitChar(displayHeaderStr)}</span>
+                            <span className={classes.headerText}>Visitor List</span>
                         </Typography>
                         {
                             showSearch && (

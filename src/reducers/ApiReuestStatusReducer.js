@@ -5,7 +5,6 @@ const ApiRequestStatusReducer = (state = {
     isRequestStatusSuccess: false,
     requestError: null
 }, action) => {
-
     switch (action.type) {
         case ApiRequestConstants.SET_API_REQUEST_PENDING:
             return {

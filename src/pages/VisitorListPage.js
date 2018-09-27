@@ -13,6 +13,8 @@ import SingedInVisitorTabContainer from '../components/VisitorTabs/VisitorTabsCo
 import SingedOutVisitorTabContainer from '../components/VisitorTabs/VisitorTabsContainer/SingedOutVisitorTabContainer';
 
 import { fetchSignedInVisitorList, fetchSignedOutVisitorList } from '../actions/VisitorActions';
+import { getDisplayStringForHeader } from '../utils/utils';
+import { type } from 'os';
 
 const styles = theme => ({
   root: {
@@ -49,8 +51,6 @@ class VisitorListPage extends React.Component {
 
     const { classes, theme, history, singedInVisitorList, singedOutVisitorList, isRequestPending } = props;
 
-    //console.log("isLoading =>", isRequestPending);
-
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
@@ -83,7 +83,7 @@ class VisitorListPage extends React.Component {
   render() {
     return (
       <main>
-        <NavBar history={this.props.history} showSearch={true} />
+        <NavBar history={this.props.history} showSearch={true} displayHeaderStr={getDisplayStringForHeader(this.props.userDetails)} />
         {this.renderTabsWithContainer(this.props)}
       </main>
     );
@@ -109,17 +109,15 @@ VisitorListPage.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-
-  const { apiRequestStatus, visitorList } = state;
-
-  //console.log("STATE - object =>", state);
-
+  const { apiRequestStatus, visitorList, employee } = state;
+  
   return {
     isRequestPending: apiRequestStatus.isReuestStatusPending,
     isRequestSuccess: apiRequestStatus.isRequestStatusSuccess,
     requestError: apiRequestStatus.requestError,
     singedInVisitorList: visitorList.signedInVisitors,
-    singedOutVisitorList: visitorList.signedOutVisitors
+    singedOutVisitorList: visitorList.signedOutVisitors,
+    userDetails: employee
   };
 }
 

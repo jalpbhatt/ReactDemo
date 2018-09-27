@@ -12,13 +12,12 @@ const loginReducerDefaultState = {
   password: undefined,
   branchCode: undefined,
   isLoggedIn: false,
-  employeeType: undefined, // Authoriser or Superuser
+  employeeType: 'Authoriser', // Authoriser or Superuser
   uniqueEmpId: undefined, // UUID from backend
   branches: ["123-564", "437-231", "038-665"]
 };
 
 const LoginReducer = (state = loginReducerDefaultState, action) => {
-  //console.log("STATE => ", state);
   switch (action.type) {  
     case LoginConstants.LOGIN:
       return {

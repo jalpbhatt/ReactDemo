@@ -50,8 +50,6 @@ const styles = theme => ({
     }
 });
 
-//TODO: Fetch associated branches to the authoriser
-//      This will be used in search page drop down
 class LoginPage extends React.Component {
 
     state = {
@@ -71,13 +69,14 @@ class LoginPage extends React.Component {
         }
     }
 
-    navigateToVisitorsDashboard = (nav) => {
-        nav.push('/visitors');
+    componentWillUpdate(nextProps, nextState) {
+        if (nextProps.isRequestSuccess) {
+            this.props.history.push('/visitors');
+        }
     }
 
     render() {
-
-        const { classes, history, isRequestPending, isRequestSuccess, loginError } = this.props;
+        const { classes, isRequestPending, loginError } = this.props;
         const { username, password, branchCode } = this.state;
 
         return (
@@ -129,7 +128,6 @@ class LoginPage extends React.Component {
 
                             <div className={classes.message}>
                                 {isRequestPending && <div>Please wait...</div>}
-                                {isRequestSuccess && this.navigateToVisitorsDashboard(history)}
                                 {loginError && <div>{loginError.message}</div>}
                             </div>
                         </form>

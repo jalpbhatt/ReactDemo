@@ -4,7 +4,7 @@ import { webService } from '../services/service';
 
 function callLoginApi(userName, password, callback) {
     setTimeout(() => {
-        if (userName === 'admin@example.com' && password === 'admin') {
+        if (userName === 'admin' && password === 'admin') {
             return callback(null);
         } else {
             return callback(new Error('Invalid email and password'));
@@ -15,18 +15,16 @@ function callLoginApi(userName, password, callback) {
 export const authoriserLogin = (userName, password, branchCode) => {
 
     return dispatch => {
-        //console.log("Request => Pending");
         dispatch(resetApiRequestStatus());
         dispatch(setApiRequestStatusPending(true));
         //webService.login();
         callLoginApi(userName, password, error => {
             dispatch(setApiRequestStatusPending(false));
             if (!error) {
-                //console.log("Request => Sucess");
                 dispatch(setApiRequestStatusSuccess(true));
                 dispatch(actionLogin({ userName: userName, password: password, branchCode: branchCode }))
+                dispatch(resetApiRequestStatus());
             } else {
-                //console.log("Request => Error", error);
                 dispatch(setApiRequestStatusError(error));
             }
         });

@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 
 import { fetchSearchVisitorList } from '../actions/SearchActions';
+import { getDisplayStringForHeader } from '../utils/utils';
 import NavBar from '../components/NavBar/NavBar';
 import InputLabel from '@material-ui/core/InputLabel';
 
@@ -187,8 +188,6 @@ class VisitorSearchPage extends React.Component {
                                         }} >
 
                                         {branches && branches.map((branch, index) => {
-                                            console.log("# selectedBranch => ", selectedBranch);
-                                            console.log("# branch => ", branch);
                                             return (
                                                 <MenuItem key={index} value={branch}>{branch}</MenuItem>
                                             )
@@ -231,7 +230,7 @@ class VisitorSearchPage extends React.Component {
     render() {
         return (
             <main>
-                <NavBar history={this.props.history} showSearch={false} />
+                <NavBar history={this.props.history} showSearch={false} displayHeaderStr={getDisplayStringForHeader(this.props.userDetails)} />
                 <div className="searchPage">
                     <div className="searchHeader">
                         <div className="title">
@@ -250,17 +249,18 @@ class VisitorSearchPage extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         searchVisitor: (data) => {
-
             dispatch(fetchSearchVisitorList(data));
         }
     };
 }
 
 const mapStateToProps = (state) => {
+    const { employee } = state;
 
     return {
-        branches: state.employee.branches,
-        selectedBranch: state.employee.branchCode
+        branches: employee.branches,
+        selectedBranch: employee.branchCode,
+        userDetails: employee
     };
 }
 

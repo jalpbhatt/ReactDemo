@@ -9,6 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 const styles = theme => ({
   root: {
@@ -59,6 +63,13 @@ const styles = theme => ({
   },
   labelDiv: {
     float: 'right'
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3,
+  },
+  group: {
+    margin: `${theme.spacing.unit}px 0`,
+    flexDirection: 'row'
   }
 });
 
@@ -66,7 +77,9 @@ const styles = theme => ({
 class ExpansionPanels extends React.Component {
 
   state = {
-    expanded: 0
+    expanded: 0,
+    materialRegViewed: 'na',
+    isHazardSheet: false
   };
 
   handleChange = panel => (event, expanded) => {
@@ -77,6 +90,10 @@ class ExpansionPanels extends React.Component {
 
   handleCheckboxChange = name => event => {
     this.setState({ [name]: event.target.checked });
+  };
+
+  handleRadioChange = name => event => {
+    this.setState({ [name]: event.target.value });
   };
 
   renderExpansionPanelDynamically = () => {
@@ -124,7 +141,31 @@ class ExpansionPanels extends React.Component {
                 </span>
               </div>
               <div>
-                <FormControlLabel control={<Checkbox checked={visitor.hazardPromptSheet} onChange={this.handleCheckboxChange(visitor.hazardPromptSheet)} value={visitor.hazardPromptSheet} color="primary" />} label="Hazard Prompt Sheet" />
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={visitor.hazardPromptSheet}
+                      onChange={this.handleCheckboxChange(visitor.hazardPromptSheet)}
+                      value={visitor.hazardPromptSheet}
+                      color="primary"
+                    />
+                  }
+                  label="Hazard Prompt Sheet"
+                />
+              </div>
+              <div>
+                <FormControl>
+                  <FormLabel>Hazardous Material Register Viewed</FormLabel>
+                  <RadioGroup
+                    aria-label="hazardousRegViewed"
+                    className={classes.group}
+                    value={this.state.materialRegViewed}
+                    onChange={this.handleRadioChange("materialRegViewed")}
+                  >
+                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                    <FormControlLabel value="na" control={<Radio />} label="NA" />
+                  </RadioGroup>
+                </FormControl>
               </div>
             </div>
           </ExpansionPanelDetails>
