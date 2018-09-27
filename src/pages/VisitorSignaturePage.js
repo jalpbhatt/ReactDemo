@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import SignatureCanvas from 'react-signature-canvas'
+import SignatureCanvas from 'react-signature-canvas';
 
 class VisitorSignaturePage extends React.Component {
 
@@ -23,18 +23,14 @@ class VisitorSignaturePage extends React.Component {
 
     render() {
         let { trimmedDataURL } = this.state
-        return <div className="container">
+        return <div className="sigContainerDiv">
             <div className="sigContainer">
                 <SignatureCanvas canvasProps={{ className: "sigPad" }}
                     ref={(ref) => { this.sigPad = ref }} />
             </div>
-            <div>
-                <button className="buttons" onClick={this.clear}>
-                    Clear
-        </button>
-                <button className="buttons" onClick={this.trim}>
-                    Trim
-        </button>
+            <div className="sigBtnDiv">
+                <Button variant="contained" color="primary" className="button" onClick={this.trim}>Ok</Button>
+                <Button variant="contained" className="button" onClick={this.clear}>Clear</Button>
             </div>
             {trimmedDataURL
                 ? <img className="sigImage"
