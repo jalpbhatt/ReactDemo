@@ -14,6 +14,7 @@ import NavMenu from '../NavMenu/NavMenu';
 const styles = {
     root: {
         flexGrow: 1,
+        position: 'relative'
     },
     grow: {
         flexGrow: 1,
@@ -21,6 +22,7 @@ const styles = {
         display: 'inline-grid'
     },
     menuButton: {
+        position: 'absolute',
         marginLeft: -12,
         marginRight: 20,
     },
@@ -29,6 +31,10 @@ const styles = {
     },
     headerText: {
         fontSize: '18px'
+    },
+    searchBtn: {
+        position: 'absolute',
+        right: '0.5%'
     }
 };
 
@@ -95,7 +101,7 @@ class NavBar extends React.Component {
                         {
                             showSearch && (
                                 <Tooltip title="Search">
-                                    <IconButton aria-label="Search" color="inherit">
+                                    <IconButton aria-label="Search" color="inherit" className={classes.searchBtn}>
                                         <Search onClick={() => { history.push('/search'); }} />
                                     </IconButton>
                                 </Tooltip>
