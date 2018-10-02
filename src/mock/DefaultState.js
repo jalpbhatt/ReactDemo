@@ -21,6 +21,12 @@
 
 */
 
+const nav = {
+    showSearch: false,
+    displayHeaderStr: "",
+    showHeaderWithTitle: false
+}
+
 const DefaultState = {
     employee: {
         userName: "",

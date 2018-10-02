@@ -1,0 +1,31 @@
+.captureDoc {
+    .docLabel {
+        width: 100%;
+        display: flex;
+        position: fixed;
+        justify-content: center;
+        margin: 45px 0 0 23px;
+    }
+    .backButtonDiv {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 65px 0 0 23px;
+    }
+    .inputType {
+        display: none;
+    }
+    .chooseFileContainer {
+        margin: 115px 0px 0 45px;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  { 
+
+    .captureDoc {
+        .backButtonDiv {
+            margin-top: 150px;
+        }
+    }
+}

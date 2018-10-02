@@ -14,7 +14,7 @@ import SingedOutVisitorTabContainer from '../components/VisitorTabs/VisitorTabsC
 
 import { fetchSignedInVisitorList, fetchSignedOutVisitorList } from '../actions/VisitorActions';
 import { getDisplayStringForHeader } from '../utils/utils';
-import { type } from 'os';
+
 
 const styles = theme => ({
   root: {
@@ -33,19 +33,26 @@ class VisitorListPage extends React.Component {
   handleChange = (event, value) => {
 
     event.preventDefault();
+    this.loadTabsData(value);
+  };
 
+  loadTabsData = value => {
     if (value === 1) {
       this.props.fetchSingedInList(1);
     } else if (value === 2) {
       this.props.fetchSingedOutList(2);
     }
-
     this.setState({ value });
-  };
+  }
 
   handleChangeIndex = index => {
-    this.setState({ value: index });
+    this.loadTabsData(index);
   };
+
+  componentWillMount() {
+    //console.log("VisitorList => componentWillMount = ", this.props.changedTabIndex);
+    this.loadTabsData(this.props.changedTabIndex);
+  }
 
   renderTabsWithContainer = (props) => {
 
@@ -72,9 +79,24 @@ class VisitorListPage extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
 
-          <TabContainer dir={theme.direction}><NewVisitorTabContainer nav={history} /></TabContainer>
-          <TabContainer dir={theme.direction}><SingedInVisitorTabContainer isLoading={isRequestPending} nav={history} signedInList={singedInVisitorList} /></TabContainer>
-          <TabContainer dir={theme.direction}><SingedOutVisitorTabContainer isLoading={isRequestPending} nav={history} signedOutList={singedOutVisitorList} /></TabContainer>
+          <TabContainer dir={theme.direction}>
+            <NewVisitorTabContainer nav={history} />
+          </TabContainer>
+          <TabContainer dir={theme.direction}>
+            <SingedInVisitorTabContainer
+              isLoading={isRequestPending}
+              nav={history}
+              signedInList={singedInVisitorList}
+              handleChangeIndex={this.handleChangeIndex}
+              tabIndex={this.state.value} />
+          </TabContainer>
+          <TabContainer dir={theme.direction}>
+            <SingedOutVisitorTabContainer
+              isLoading={isRequestPending}
+              nav={history}
+              signedOutList={singedOutVisitorList} 
+              tabIndex={this.state.value} />
+          </TabContainer>
         </SwipeableViews>
       </div>
     );
@@ -83,7 +105,8 @@ class VisitorListPage extends React.Component {
   render() {
     return (
       <main>
-        <NavBar history={this.props.history} showSearch={true} displayHeaderStr={getDisplayStringForHeader(this.props.userDetails)} />
+        <NavBar history={this.props.history} showSearch={true} displayHeaderStr={getDisplayStringForHeader(this.props.userDetails)}
+          showHeaderWithTitle={true} />
         {this.renderTabsWithContainer(this.props)}
       </main>
     );
@@ -110,14 +133,15 @@ VisitorListPage.propTypes = {
 
 const mapStateToProps = (state) => {
   const { apiRequestStatus, visitorList, employee } = state;
-  
+
   return {
     isRequestPending: apiRequestStatus.isReuestStatusPending,
     isRequestSuccess: apiRequestStatus.isRequestStatusSuccess,
     requestError: apiRequestStatus.requestError,
     singedInVisitorList: visitorList.signedInVisitors,
     singedOutVisitorList: visitorList.signedOutVisitors,
-    userDetails: employee
+    userDetails: employee,
+    changedTabIndex: visitorList.changedTabIndex
   };
 }
 

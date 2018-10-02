@@ -230,7 +230,8 @@ class VisitorSearchPage extends React.Component {
     render() {
         return (
             <main>
-                <NavBar history={this.props.history} showSearch={false} displayHeaderStr={getDisplayStringForHeader(this.props.userDetails)} />
+                <NavBar history={this.props.history} showSearch={false} displayHeaderStr={getDisplayStringForHeader(this.props.userDetails)}
+                    showHeaderWithTitle={true} />
                 <div className="searchPage">
                     <div className="searchHeader">
                         <div className="title">

@@ -65,7 +65,7 @@ class NavBar extends React.Component {
     );
 
     render() {
-        const { classes, history, showSearch, displayHeaderStr } = this.props;
+        const { classes, history, showSearch, displayHeaderStr, showHeaderWithTitle } = this.props;
         const { anchorEl, isOpen } = this.state;
 
         return (
@@ -79,10 +79,19 @@ class NavBar extends React.Component {
                                 onClick={this.handleNavClick}
                             />
                         </IconButton>
-                        <Typography variant="title" color="inherit" className={classes.grow}>
-                            <span className={classes.loggedInUserName}>{this.capitalizeInitChar(displayHeaderStr)}</span>
-                            <span className={classes.headerText}>Visitor List</span>
-                        </Typography>
+                        {
+                            showHeaderWithTitle ? (
+                                <Typography variant="title" color="inherit" className={classes.grow}>
+                                    <span className={classes.loggedInUserName}>{this.capitalizeInitChar(displayHeaderStr)}</span>
+                                    <span className={classes.headerText}>Visitor List</span>
+                                </Typography>
+                            ) : (
+                                    <Typography variant="title" color="inherit" className={classes.grow}>
+                                        <span className={classes.headerText}>{displayHeaderStr}</span>
+                                    </Typography>
+                                )
+                        }
+
                         {
                             showSearch && (
                                 <Tooltip title="Search">

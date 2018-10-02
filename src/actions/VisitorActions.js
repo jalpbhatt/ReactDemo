@@ -12,14 +12,19 @@ export const addNewVisitor = (newVisitor = {}) => ({
 });
 
 /* authoriser_id is authoriser/empoyee name */
-export const uploadVisitorSignature = (authoriser_id, { visitorSignatureFile } = {}) => ({
+export const uploadVisitorSignature = (authoriser_id, signature = {}) => ({
     type: VisitorConstants.UPLOAD_VISITOR_SIGNATURE,
     newVisitorDetails: {
         userName: authoriser_id,
-        visitorSignatureFile
+        visitorSignatureFile: signature
     }
 });
 
+export const changeTab = (index) => ({
+    type: VisitorConstants.CHANGE_TAB,
+    index
+})
+ 
 export const fetchSignedInVisitorList = (authoriser_id) => {
     return dispatch => {
 

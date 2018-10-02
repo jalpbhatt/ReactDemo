@@ -78,7 +78,7 @@ class ExpansionPanels extends React.Component {
 
   state = {
     expanded: 0,
-    materialRegViewed: 'na',
+    materialRegViewed: 'NA',
     isHazardSheet: false
   };
 
@@ -98,7 +98,7 @@ class ExpansionPanels extends React.Component {
 
   renderExpansionPanelDynamically = () => {
 
-    const { classes, visitorList } = this.props;
+    const { classes, visitorList, tabIndex } = this.props;
     const { expanded } = this.state;
     let expansionPanel = [];
 
@@ -152,21 +152,30 @@ class ExpansionPanels extends React.Component {
                   label="Hazard Prompt Sheet"
                 />
               </div>
-              <div>
-                <FormControl>
-                  <FormLabel>Hazardous Material Register Viewed</FormLabel>
-                  <RadioGroup
-                    aria-label="hazardousRegViewed"
-                    className={classes.group}
-                    value={this.state.materialRegViewed}
-                    onChange={this.handleRadioChange("materialRegViewed")}
-                  >
-                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                    <FormControlLabel value="no" control={<Radio />} label="No" />
-                    <FormControlLabel value="na" control={<Radio />} label="NA" />
-                  </RadioGroup>
-                </FormControl>
-              </div>
+
+              {
+                tabIndex == 2 ? (
+                  <div>
+                    <span>Hazardous Material Register Viewed: {this.state.materialRegViewed}</span>
+                  </div>
+                ) : (
+                    <div>
+                      <FormControl>
+                        <FormLabel>Hazardous Material Register Viewed</FormLabel>
+                        <RadioGroup
+                          aria-label="hazardousRegViewed"
+                          className={classes.group}
+                          value={this.state.materialRegViewed}
+                          onChange={this.handleRadioChange("materialRegViewed")}
+                        >
+                          <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                          <FormControlLabel value="No" control={<Radio />} label="No" />
+                          <FormControlLabel value="NA" control={<Radio />} label="NA" />
+                        </RadioGroup>
+                      </FormControl>
+                    </div>
+                  )
+              }
             </div>
           </ExpansionPanelDetails>
         </ExpansionPanel>
